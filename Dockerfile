@@ -11,6 +11,12 @@ COPY package.json pnpm-lock.yaml* ./
 # Install dependencies
 RUN pnpm install --frozen-lockfile
 
+# Generate TypeScript config files first
+RUN pnpm svelte-kit sync
+
+# Verificar se o arquivo tsconfig.json foi gerado
+RUN ls -l .svelte-kit/tsconfig.json
+
 # Copy the rest of the application
 COPY . .
 
