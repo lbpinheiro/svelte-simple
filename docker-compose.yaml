@@ -5,8 +5,8 @@ services:
       dockerfile: Dockerfile
     container_name: sveltekit-app
     restart: unless-stopped
-    #ports:
-    #  - "3000:3000"
+    ports:
+      - "3000:3000"
     environment:
       - NODE_ENV=production
       #- PORT=3000
@@ -14,11 +14,11 @@ services:
     networks:
       - app-network
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000/"]  # Verifica se a página inicial está respondendo
-      interval: 30s  # Intervalo entre as verificações
-      retries: 3     # Tentativas antes de considerar o container como unhealthy
-      start_period: 30s  # Tempo de espera antes de iniciar as verificações
-      timeout: 10s   # Tempo máximo para a resposta do servidor
+      test: ["CMD", "curl", "-f", "http://localhost:3000/"] # Verifica se a página inicial está respondendo
+      interval: 30s # Intervalo entre as verificações
+      retries: 3 # Tentativas antes de considerar o container como unhealthy
+      start_period: 30s # Tempo de espera antes de iniciar as verificações
+      timeout: 10s # Tempo máximo para a resposta do servidor
 
   # Optional: Add a database service if needed
   # db:
@@ -37,6 +37,5 @@ services:
 networks:
   app-network:
     driver: bridge
-
 # volumes:
 #   postgres_data:
