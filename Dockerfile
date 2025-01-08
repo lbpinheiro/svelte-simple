@@ -25,6 +25,7 @@ RUN pnpm svelte-kit sync
 
 # Build the application
 RUN pnpm run build
+RUN ls -la .svelte-kit/ && ls -la build/  # Adicionando comando aqui
 
 # Production stage
 FROM node:18-alpine as production
@@ -33,10 +34,11 @@ WORKDIR /app
 
 
 # Copiar arquivos de build do contêiner 'builder'
-COPY --from=builder /app/.svelte-kit /app/.svelte-kit
+#COPY --from=builder /app/.svelte-kit /app/.svelte-kit
+COPY --from=builder /app/build /app/build
 COPY --from=builder /app/package.json /app/package.json
 COPY --from=builder /app/node_modules /app/node_modules
 
 EXPOSE 3000
 # CMD ["node", ".svelte-kit/output/server/index.js"]
-CMD ["sh", "-c", "ls -la && node .svelte-kit/output/server/index.js"]
+CMD ["sh", "-c", "ls -la .svelte-kit/ && ls -la && node .svelte-kit/output/server/index.js"]
