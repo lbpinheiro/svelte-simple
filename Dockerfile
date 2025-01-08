@@ -38,4 +38,5 @@ COPY --from=builder /app/package.json /app/package.json
 COPY --from=builder /app/node_modules /app/node_modules
 
 EXPOSE 3000
-CMD ["node", ".svelte-kit/output/server/index.js"]
+# CMD ["node", ".svelte-kit/output/server/index.js"]
+CMD ["sh", "-c", "ls -la && node .svelte-kit/output/server/index.js"]

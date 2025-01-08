@@ -14,7 +14,14 @@ services:
     # networks:
     #   - app-network
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      #test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://localhost:3000').then(r => process.exit(r.ok ? 0 : 1))",
+        ]
       interval: 30s
       timeout: 10s
       retries: 3
