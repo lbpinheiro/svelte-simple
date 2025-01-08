@@ -26,10 +26,26 @@ RUN pnpm svelte-kit sync
 # Build the application
 RUN pnpm run build
 
-# Production stage
-FROM node:18-alpine as production
+# # Estágio de Produção
+# FROM nginx:alpine as production
 
-WORKDIR /app
+# # Copiar os arquivos estáticos do build gerado
+# COPY --from=builder /app/.svelte-kit/output/client /usr/share/nginx/html
+
+# # Copiar a configuração personalizada do nginx
+# COPY nginx.conf /etc/nginx/nginx.conf
+
+# # Expor a porta para o Nginx
+# EXPOSE 80
+
+# # Iniciar o Nginx
+# CMD ["nginx", "-g", "daemon off;"]
+
+
+# Production stage
+ FROM node:18-alpine as production
+
+ WORKDIR /app
 
 
 # Copiar arquivos de build do contêiner 'builder'

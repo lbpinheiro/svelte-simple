@@ -7,10 +7,10 @@ services:
     restart: unless-stopped
     # ports:
     #   - "3000:3000"
-    # environment:
+     environment:
     #   - NODE_ENV=production
-    #- PORT=3000
-    #- ORIGIN=https://your-domain.com
+    #  - PORT=3000
+      - ORIGIN=https://svelte.vm.lucasdesenv.com
     # networks:
     #   - app-network
     # healthcheck:
