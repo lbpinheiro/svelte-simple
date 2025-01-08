@@ -32,11 +32,11 @@ FROM node:18-alpine as production
 
 WORKDIR /app
 
-# Copy built assets from builder
-#COPY --from=builder /app/build build/
-COPY --from=builder /app/.svelte-kit/output .svelte-kit/output
-COPY --from=builder /app/package.json .
-COPY --from=builder /app/node_modules node_modules/
+
+# Copiar arquivos de build do contêiner 'builder'
+COPY --from=builder /app/.svelte-kit/output /app/.svelte-kit/output
+COPY --from=builder /app/package.json /app/package.json
+COPY --from=builder /app/node_modules /app/node_modules
 
 EXPOSE 3000
 CMD ["node", "build"]
