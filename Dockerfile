@@ -9,20 +9,19 @@ RUN corepack enable && corepack prepare pnpm@latest --activate
 WORKDIR /app
 
 # Copy package files
-COPY package.json pnpm-lock.yaml* ./
+COPY svelte.config.js package.json pnpm-lock.yaml* ./
 
 # Install dependencies
 RUN pnpm install --frozen-lockfile
 
 # Copy the rest of the application
 COPY . .
-RUN ls -l svelte.config.js
 
 # Generate TypeScript config files first
 RUN pnpm svelte-kit sync
 
 # Verificar se o arquivo tsconfig.json foi gerado
-RUN ls -l .svelte-kit/tsconfig.json
+#RUN ls -l .svelte-kit/tsconfig.json
 
 # Build the application
 RUN pnpm run build
