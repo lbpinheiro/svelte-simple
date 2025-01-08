@@ -33,9 +33,9 @@ RUN apk add --no-cache wget  # Adicionando wget
 WORKDIR /app
 
 
-#COPY --from=builder /app/.svelte-kit/output /app/.svelte-kit/output
+COPY --from=builder /app/.svelte-kit/output /app/.svelte-kit/output
 COPY --from=builder /app/build /app/build
 COPY --from=builder /app/package.json /app/package.json
 COPY --from=builder /app/node_modules /app/node_modules
 EXPOSE 3000
-CMD ["node", ".build/index.js"]
+CMD ["node", "build/index.js"]
