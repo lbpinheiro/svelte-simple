@@ -29,16 +29,12 @@ RUN ls -la .svelte-kit/ && ls -la build/  # Adicionando comando aqui
 
 # Production stage
 FROM node:18-alpine as production
-
+RUN apk add --no-cache wget  # Adicionando wget
 WORKDIR /app
 
 
-# Copiar arquivos de build do contêiner 'builder'
-#COPY --from=builder /app/.svelte-kit /app/.svelte-kit
-COPY --from=builder /app/build /app/build
+COPY --from=builder /app/.svelte-kit/output /app/.svelte-kit/output
 COPY --from=builder /app/package.json /app/package.json
 COPY --from=builder /app/node_modules /app/node_modules
-
 EXPOSE 3000
-# CMD ["node", ".svelte-kit/output/server/index.js"]
-CMD ["sh", "-c", "ls -la .svelte-kit/ && ls -la && node .svelte-kit/output/server/index.js"]
+CMD ["node", ".svelte-kit/output/server/index.js"]
