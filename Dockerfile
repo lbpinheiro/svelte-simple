@@ -27,6 +27,8 @@ COPY . .
 RUN pnpm svelte-kit sync && \
     pnpm run build
 
+RUN ls -la . && ls -la .svelte-kit/ && ls -la build/ && ls -la dist/
+
 # Production stage
 FROM node:${NODE_VERSION}-alpine AS production
 
@@ -62,4 +64,4 @@ EXPOSE 3000
 ENTRYPOINT ["/sbin/tini", "--"]
 
 # Start the application
-CMD ["node", "build"]
+CMD ["node", "build/index.js"]
