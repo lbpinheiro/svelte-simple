@@ -27,7 +27,7 @@ COPY . .
 RUN pnpm svelte-kit sync && \
     pnpm run build
 
-RUN ls -la . && ls -la .svelte-kit/ && ls -la build/ && ls -la dist/
+RUN ls -la . && ls -la .svelte-kit/ && ls -la build/
 
 # Production stage
 FROM node:${NODE_VERSION}-alpine AS production
