@@ -1,4 +1,4 @@
-FROM node:18-alpine as builder
+FROM node:18-alpine AS builder
 
 # Instalar curl (necessário para o healthcheck)
 #RUN apk add --no-cache curl
@@ -28,7 +28,7 @@ RUN pnpm run build
 RUN ls -la .svelte-kit/ && ls -la build/  # Adicionando comando aqui
 
 # Production stage
-FROM node:18-alpine as production
+FROM node:18-alpine AS production
 RUN apk add --no-cache wget  # Adicionando wget
 WORKDIR /app
 
