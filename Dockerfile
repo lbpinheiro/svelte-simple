@@ -1,7 +1,7 @@
 FROM node:18-alpine as builder
 
 # Instalar curl (necessário para o healthcheck)
-RUN apk add --no-cache curl
+#RUN apk add --no-cache curl
 
 # Install pnpm
 RUN corepack enable && corepack prepare pnpm@latest --activate
