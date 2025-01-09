@@ -13,12 +13,13 @@ services:
       - ORIGIN=https://svelte.vm.lucasdesenv.com
     # networks:
     #   - app-network
-    #healthcheck:
+    healthcheck:
       #test: ["CMD", "curl", "-f", "http://localhost:3000"]
       #test: ["CMD", "wget", "--spider", "http://localhost"]
-      #interval: 30s
-      #timeout: 10s
-      #retries: 3
+      test: ["CMD", "echo", "healthcheck"]  # Always returns success
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
   # Optional: Add a database service if needed
   # db:
